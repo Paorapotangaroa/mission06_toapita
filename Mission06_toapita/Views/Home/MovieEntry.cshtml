@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Movie Entry Form";
+}
+@*Add access to the model*@
+@model Mission06_toapita.Models.Movies
+
+
+<div>
+<!--Create the form and make it post-->
+    <form asp-action="MovieEntry" method="post">
+        <fieldset>
+            <legend>New Movie Form</legend>
+            <!--Input for Category -->
+            <label asp-for="Category">Movie Category:</label>
+            <input asp-for="Category">
+            <br>
+
+            <!--Input for Title -->
+            <label asp-for="Title">Movie Title:</label>
+            <input asp-for="Title">
+            <br>
+
+            <!--Input for Year -->
+            <label asp-for="Year">Movie Year</label>
+            <input asp-for="Year">
+            <br>
+
+            <!--Input for Director -->
+            <label asp-for="Director">Movie Director</label>
+            <input asp-for="Director">
+            <br>
+
+            <!--Input for Rating -->
+            <label asp-for="Rating">Movie Rating</label>
+            <!--Loop through our RatingOptions array and create an option for each one-->
+            <select asp-for="Rating">
+                @foreach (string rating in Movies.RatingOptions)
+                {
+                    <option value="@rating">@rating</option>
+                }
+            </select>
+            <br>
+
+            <!--Input for Edited -->
+            <label asp-for="Edited">Does the Movie Need To Be Edited:</label>
+            <select asp-for="Edited">
+                <!--I didn't loop here because it would have been longer-->
+                <option value=true>Yes</option>
+                <option value=false>No</option>
+            </select>
+            <br>
+
+            <!--Input for Lent_To -->
+            <label asp-for="Lent_To">Lent To:</label>
+            <input asp-for="Lent_To">
+            <br>
+
+            <!--Input for Notes -->
+            <label asp-for="Notes">Notes:</label>
+            <input asp-for="Notes">
+            <br>
+
+            <!--Allow them to submit the form-->
+            <input type="submit" value="Save" />
+
+        </fieldset>
+    </form>
+    <!--On return to page because of invalid input explain why-->
+    <div asp-validation-summary="All"></div>
+</div>
