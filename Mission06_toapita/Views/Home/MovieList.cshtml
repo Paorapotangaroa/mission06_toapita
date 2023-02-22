@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Movie List";
+}
+@model List<Movies>
+<!--Create a table and loop through the list of Movies to fill the table-->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Director</th>
+            <th>Rating</th>
+            <th>Edited</th>
+            <th>Lent To</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <!--Edit and Delete on opposite sides of the table because I think they look better that way-->
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@x.MovieID">
+                        Edit
+                    </a>
+                </td>
+                <!--Add the category description using category object-->
+                <td>@x.Category.CategoryDescription</td>
+                <td>@x.Title</td>
+                <td>@x.Year</td>
+                <td>@x.Director</td>
+                <td>@x.Rating</td>
+                <td>@x.Edited</td>
+                <td>@x.Lent_To</td>
+                <td>@x.Notes</td>
+                <td>
+                    <a asp-controller="Home" asp-action="Delete" asp-route-id="@x.MovieID">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -15,8 +15,10 @@ namespace Mission06_toapita.Models
         public int MovieID { get; set; }
 
         //Require some every field except Edited, Lent To, and Notes
+        //FK relationship setup
         [Required]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]

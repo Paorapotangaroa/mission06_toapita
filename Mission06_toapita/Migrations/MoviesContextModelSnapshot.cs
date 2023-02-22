@@ -15,15 +15,70 @@ namespace Mission06_toapita.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission06_toapita.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryDescription")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryDescription = "Television"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryDescription = "VHS"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryDescription = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryDescription = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryDescription = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryDescription = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryDescription = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryDescription = "Family"
+                        });
+                });
+
             modelBuilder.Entity("Mission06_toapita.Models.Movies", b =>
                 {
                     b.Property<int>("MovieID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -52,13 +107,15 @@ namespace Mission06_toapita.Migrations
 
                     b.HasKey("MovieID");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Movies");
 
                     b.HasData(
                         new
                         {
                             MovieID = 1,
-                            Category = "Sci-fi",
+                            CategoryId = 6,
                             Director = "George Lucas",
                             Edited = false,
                             Rating = "PG",
@@ -68,7 +125,7 @@ namespace Mission06_toapita.Migrations
                         new
                         {
                             MovieID = 2,
-                            Category = "Comedy",
+                            CategoryId = 7,
                             Director = "Simon Langton",
                             Edited = false,
                             Rating = "PG",
@@ -78,13 +135,22 @@ namespace Mission06_toapita.Migrations
                         new
                         {
                             MovieID = 3,
-                            Category = "Action/Adventure",
+                            CategoryId = 7,
                             Director = "Taika Waititi",
                             Edited = true,
                             Rating = "PG-13",
                             Title = "Thor Ragnarok",
                             Year = 2017
                         });
+                });
+
+            modelBuilder.Entity("Mission06_toapita.Models.Movies", b =>
+                {
+                    b.HasOne("Mission06_toapita.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

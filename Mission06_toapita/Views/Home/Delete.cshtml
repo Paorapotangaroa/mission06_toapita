@@ -1,0 +1,13 @@
+﻿@{
+}
+@model Mission06_toapita.Models.Movies
+<!--Simple page to confirm they actually want to delete a movie-->
+    <div>
+        <form method="post">
+            <input asp-for="MovieID" type="hidden"/>
+            <p>Are you sure you want to delete @Model.Title?</p>
+            <input type="submit" value="Delete" class="btn-dark btn-lg" />
+            <a asp-controller="Home" asp-action="MovieList" class="btn-primary btn-lg">Cancel</a>
+        </form>
+        
+    </div>
